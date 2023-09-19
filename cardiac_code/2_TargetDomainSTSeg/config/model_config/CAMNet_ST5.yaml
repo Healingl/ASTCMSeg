@@ -1,0 +1,66 @@
+model_name: CAMNet
+modality: cross_modality
+
+gen_target_plabel_data_dir: '/mnt/data4/zyz/UDA3DSeg/public_code/ASTCMSeg/data/VAST_mr2ct_target_label/Iter_5/'
+
+cate_to_label_dict: {'bg':0, "MYO": 1,  'LAC':2, 'LVC':3, 'AA':4}
+label_to_cate_dict: {'0':'bg', '1':'MYO',  '2':'LAC', '3':'LVC', '4':'AA'}
+
+cal_class_list: [1,2,3,4]
+
+# train and test data direction: 'mr2ct'
+# fake_t2
+labeled_fake_t2_volume_csv_path: './csv/all_fake_mr2ct_ACMIT_prep_volume.csv'
+
+# t2
+unlabeled_t2_volume_csv_path:  './csv/train_test/ct_train_prep_volume.csv'
+
+# val volume
+# fake_t2
+val_real_t2_volume_csv_path: './csv/train_test/ct_test_prep_volume.csv'
+
+gpus: [0]
+
+# training, all samples: batch_size*each_epoch_iter*num_epochs = 25600*8, all iterations: 256*100 = 25600iter
+train_labeled_batch_size: 2
+train_unlabeled_batch_size: 2
+val_batch_size: 2
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # Model Parameter
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+num_epochs: 100
+eval_metric_epoch: 1
+
+seed: 2022
+
+# z, y, x
+crop_size: [32, 256, 256]
+#crop_type in ['random']
+crop_type: 'random'
+
+val_slide_step_size: [16, 16, 16]
+
+use_aug: True
+fp16: True
+
+input_channels: 1
+num_classes: 5
+base_filter: 16
+
+# optimizer:
+# name: 'Adam'
+name: 'Adam'
+seg_lr: 0.0002
+weight_decay: 0.0005
+seg_betas: [0.5, 0.999]
+
+# cosine
+eta_min: 5e-7
+
+
+resume: False
+resume_iter: 0
+resume_weight_dir: './work_dir/CAMNet_ST5/'
+
+workdir: './work_dir/CAMNet_ST5/'

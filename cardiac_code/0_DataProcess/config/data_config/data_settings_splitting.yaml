@@ -1,0 +1,49 @@
+
+# origin data
+ct_train_npz_txt_path: '/mnt/data4/zyz/UDA3DSeg/data/UDA_Abdominal_Heart/uda_cardiac/datalist/ct_train_npz.txt'
+ct_test_npz_txt_path: '/mnt/data4/zyz/UDA3DSeg/data/UDA_Abdominal_Heart/uda_cardiac/datalist/ct_test_npz.txt'
+
+mr_train_npz_txt_path: '/mnt/data4/zyz/UDA3DSeg/data/UDA_Abdominal_Heart/uda_cardiac/datalist/mr_train_npz.txt'
+mr_test_npz_txt_path: '/mnt/data4/zyz/UDA3DSeg/data/UDA_Abdominal_Heart/uda_cardiac/datalist/mr_test_npz.txt'
+
+ct_npz_dir: '/mnt/data4/zyz/UDA3DSeg/data/UDA_Abdominal_Heart/uda_cardiac/ct_npz/'
+mr_npz_dir: '/mnt/data4/zyz/UDA3DSeg/data/UDA_Abdominal_Heart/uda_cardiac/mr_npz/'
+
+# nii csv
+all_ct_npz_data_csv_path: './csv/all_ct_npz_data.csv'
+all_mr_npz_data_csv_path: './csv/all_mr_npz_data.csv'
+
+ct_train_npz_data_csv_path: './csv/train_test/ct_train_npz_data.csv'
+ct_test_npz_data_csv_path: './csv/train_test/ct_test_npz_data.csv'
+
+mr_train_npz_data_csv_path: './csv/train_test/mr_train_npz_data.csv'
+mr_test_npz_data_csv_path: './csv/train_test/mr_test_npz_data.csv'
+
+
+# preprocessed data dir
+prep_ct_data_dir: '/mnt/data4/zyz/UDA3DSeg/public_code/ASTCMSeg/data/CT/'
+prep_mr_data_dir: '/mnt/data4/zyz/UDA3DSeg/public_code/ASTCMSeg/data/MR/'
+
+
+# csv dir
+csv_dir: './csv/'
+
+# train test dir
+split_dir: './csv/train_test/'
+
+# 3D prep csv
+all_ct_prep_volume_data_csv_path: './csv/all_ct_prep_volume_data.csv'
+all_mr_prep_volume_data_csv_path: './csv/all_mr_prep_volume_data.csv'
+
+# 2D slices csv
+all_ct_prep_slices_data_csv_path: './csv/all_ct_prep_slices_data.csv'
+all_mr_prep_slices_data_csv_path: './csv/all_mr_prep_slices_data.csv'
+
+
+# cate name to label
+# Multi-tasks Cardiac Segmentation between CT and MR
+cate_to_label_dict: {'bg':0, "MYO": 1,  'LAC':2, 'LVC':3, 'AA':4}
+label_to_cate_dict: {'0':'bg', '1':'MYO',  '2':'LAC', '3':'LVC', '4':'AA'}
+
+
+

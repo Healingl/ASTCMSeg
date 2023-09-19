@@ -1,0 +1,129 @@
+model_name: ACMIT
+modality: cross_modality
+
+cate_to_label_dict: {'bg':0, "MYO": 1,  'LAC':2, 'LVC':3, 'AA':4}
+label_to_cate_dict: {'0':'bg', '1':'MYO',  '2':'LAC', '3':'LVC', '4':'AA'}
+
+cal_class_list: [1,2,3,4]
+
+# train and test data
+#direction: 'mr2ct'
+# t1
+labeled_t1_slices_csv_path: './csv/all_mr_prep_slices_data.csv'
+# t2
+unlabeled_t2_slices_csv_path:  './csv/all_ct_prep_slices_data.csv'
+
+
+gpus: [0]
+
+# training, all samples: batch_size*each_epoch_iter*num_epochs = 25600*8, all iterations: 256*100 = 25600iter
+train_batch_size: 2
+# eval img bs
+eval_batch_size: 8
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # Model Parameter
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+seed: 2022
+# h,w
+image_size: [256, 256]
+
+# input image channels
+input_nc: 1
+# output image channels
+output_nc: 1
+# input image channels for segmentation
+input_nc_seg: 1
+# output image channels for segmentation
+output_nc_seg: 5
+skip: False
+
+
+# ACMIT
+isTrain: True
+direction: 'AtoB'
+criterion_name: 'BCEDiceLoss'
+
+# the number of gen filters in first conv layer
+# 64
+ngf: 64
+# the number of discrim filters in first conv layer
+ndf: 64
+
+# GAN type
+gan_mode: 'lsgan'
+# selects model to use for netD
+netD: basic
+# ['resnet_9blocks', 'resnet_6blocks', 'unet_256', 'unet_128', 'stylegan2', 'smallstylegan2', 'resnet_cat']
+netG: resnet_9blocks
+netSeg: unet
+
+n_layers_D: 3
+normG: 'instance'
+normD: 'instance'
+init_type: 'xavier'
+init_gain: 0.02
+
+no_dropout: True
+
+no_antialias: False
+no_antialias_up: False
+
+
+# loss hyper-params
+lambda_GAN: 1.0
+lambda_WNCE: 0.1
+lambda_ARC: 0.05
+lambda_DICE: 1.0
+lambda_Fre: 0.1
+
+nce_idt: True
+nce_layers: [0,4,8,12,16]
+nce_includes_all_negatives_from_minibatch: False
+alpha: 0.2
+
+# gradually increase weights of ARC
+use_curriculum: True
+weigth_warm_epochs: 50
+WNCE_weight_scale: 10
+
+
+netF: 'mlp_sample'
+netF_nc: 256
+nce_T: 0.07
+num_patches: 256
+flip_equivariance: False
+
+continue_train: False
+which_epoch_continue_train: ''
+
+# frequence domain
+# gauss kernel size
+# 7, 21, 63, 95, 127
+gauss_kernel_size: 63
+
+# training param
+# all epochs: n_epochs+n_epochs_decay
+n_epochs: 200
+n_epochs_decay: 200
+step_gamma_epoch: 200
+epoch_count: 0
+lr_policy: 'linear'
+# if step
+lr_decay_iters: 25
+
+
+beta1: 0.5
+beta2: 0.999
+lr: 0.0002
+seg_lr: 0.0001
+
+
+pool_size: 50
+
+
+resume: False
+resume_iter: 0
+resume_weight_dir: './work_dir/onlyt1encseg/ACMIT_SynModel/model_weight/'
+
+workdir: './work_dir/ACMIT_SynModel/'
